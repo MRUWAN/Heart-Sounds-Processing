@@ -1,0 +1,31 @@
+clc;
+close all;
+load handel.mat
+[sig1, fs] = audioread('adultCASE1.mp3'); % import the song
+sig1 = sig1(:);
+t = (1:length(sig1)) / fs;
+subplot(3, 1, 1)
+plot(t, sig1) % plot the song
+xlabel('t (second)')
+ylabel('Relative signal strength')
+title('Song')
+
+[sig2, fs] = audioread('impulse-response-church-105010.mp3'); % import the song
+sig2 = sig2(:);
+t1 = (1:length(sig2)) / fs;
+subplot(3, 1, 2)
+plot(t1, sig2) % plot the song
+xlabel('t1 (second)')
+ylabel('Relative signal strength')
+title('Impulse Response')
+
+w = conv(sig1, sig2);
+
+t2 = (1:length(w)) / fs; % Adjust the time vector for the convolved signal
+subplot(3, 1, 3);
+plot(t2, w);
+xlabel('t2 (second)')
+ylabel('Relative signal strength')
+title('Convolved Signal')
+sound(w,fs)
+audiowrite('convolved_audio.wav', w, fs);
