@@ -9,7 +9,7 @@ subplot(3, 1, 1)
 plot(t, sig1) % plot the song
 xlabel('t (second)')
 ylabel('Relative signal strength')
-title('Song')
+title('Signal')
 
 [sig2, fs] = audioread('impulse-response-church-105010.mp3'); % import the song
 sig2 = sig2(:);
